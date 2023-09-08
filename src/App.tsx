@@ -25,7 +25,9 @@ function App() {
     <>
       <ConfigProvider theme={theme}>
         <WordInputModal />
-        {JSON.stringify(wordList)}
+        <main>
+          {wordList.length > 0 ? wordList.map(i => (<span>{i.text}</span>)) : "Space Start"}
+        </main>
       </ConfigProvider >
     </>
   )
