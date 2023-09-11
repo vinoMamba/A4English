@@ -1,6 +1,7 @@
 import { Input, InputRef, Modal } from "antd"
 import { useEffect, useRef, useState } from "react";
 import { useWordList } from "../hooks/useWords";
+import { useKeyPress } from "../hooks/useKeyPress";
 
 export const WordInputModal = () => {
   const [addWord] = useWordList(s => [s.addWord])
@@ -8,25 +9,14 @@ export const WordInputModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const inputRef = useRef<InputRef | null>(null)
 
-
-  useEffect(() => {
-    const handleKeypress = (e: KeyboardEvent) => {
-      if (e.code === 'Space') {
-        setIsModalOpen(true)
-      }
-
-      if (e.code === 'Enter' && isModalOpen && word) {
-        setIsModalOpen(false)
-        addWord(word)
-        setWord("")
-      }
+  useKeyPress('Space', () => setIsModalOpen(true))
+  useKeyPress('Enter', () => {
+    if (isModalOpen && word) {
+      setIsModalOpen(false)
+      addWord(word)
+      setWord("")
     }
-
-    window.addEventListener("keypress", handleKeypress)
-    return () => {
-      window.removeEventListener("keypress", handleKeypress)
-    }
-  }, [isModalOpen, addWord, word])
+  })
 
   useEffect(() => {
     if (isModalOpen) {

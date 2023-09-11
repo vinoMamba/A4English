@@ -2,7 +2,7 @@ import { ConfigProvider, ThemeConfig } from "antd"
 import { WordInputModal } from "./components/WordInputModal"
 import { useWordList } from "./hooks/useWords"
 import { WordItem } from "./components/WordItem"
-import { useEffect } from "react"
+import { useKeyPress } from "./hooks/useKeyPress"
 
 function App() {
   const [wordList, currentIndex, plusOne, minusOne] = useWordList(s => [s.wordList, s.currentIndex, s.plusOne, s.minusOne])
@@ -21,22 +21,9 @@ function App() {
       },
     }
   }
-
-  useEffect(() => {
-    const handleKeypress = (e: KeyboardEvent) => {
-      if (e.code === 'Equal') {
-        plusOne()
-      }
-      if (e.code === 'Minus') {
-        minusOne()
-      }
-    }
-    window.addEventListener("keypress", handleKeypress)
-    return () => {
-      window.removeEventListener("keypress", handleKeypress)
-    }
-  }, [minusOne, plusOne])
-
+  useKeyPress('Equal',plusOne)
+  useKeyPress('Minus',minusOne)
+  
   return (
     <>
       <ConfigProvider theme={theme}>
