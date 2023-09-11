@@ -15,7 +15,7 @@ export const WordInputModal = () => {
         setIsModalOpen(true)
       }
 
-      if (e.code === 'Enter' && isModalOpen) {
+      if (e.code === 'Enter' && isModalOpen && word) {
         setIsModalOpen(false)
         addWord(word)
         setWord("")
@@ -39,7 +39,7 @@ export const WordInputModal = () => {
   return (
     <Modal open={isModalOpen} closeIcon={false} title={null} footer={null}>
       <Input
-        style={{ fontSize: '24px' }}
+        style={{ fontSize: '16px' }}
         ref={inputRef}
         bordered={false}
         placeholder="Input Word"

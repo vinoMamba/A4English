@@ -1,9 +1,19 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
 body {
-  background:rgba(0, 0, 0, .2);
-  color:rgba(0,0,0,.8);
-  font-size: 24px;
+  font-size: 16px;
 }
 
 span {
   font-weight: bold;
+}
+
+main {
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
 }

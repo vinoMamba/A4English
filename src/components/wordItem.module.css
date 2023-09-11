@@ -1,0 +1,6 @@
+.item {
+  color:rgba(0,0,0,.5);
+  cursor:pointer;
+  position: absolute;
+  padding: 2px 4px;
+}
