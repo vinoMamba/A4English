@@ -3,8 +3,10 @@ import { WordInputModal } from "./components/WordInputModal"
 import { useWordList } from "./hooks/useWords"
 import { WordItem } from "./components/WordItem"
 import { useKeyPress } from "./hooks/useKeyPress"
+import { Mode, useVimKeyMaps } from "./hooks/useVimKeyMaps"
 
 function App() {
+  const [mode] = useVimKeyMaps(s => [s.mode])
   const [wordList, currentIndex, plusOne, minusOne] = useWordList(s => [s.wordList, s.currentIndex, s.plusOne, s.minusOne])
   const theme: ThemeConfig = {
     token: {
@@ -21,11 +23,22 @@ function App() {
       },
     }
   }
-  useKeyPress('Equal',plusOne)
-  useKeyPress('Minus',minusOne)
-  
+
+  useKeyPress('KeyJ', () => {
+    if (mode === Mode.N) {
+      plusOne()
+    }
+  })
+
+  useKeyPress('KeyK', () => {
+    if (mode === Mode.N) {
+      minusOne()
+    }
+  })
+
   return (
     <>
+      {currentIndex}
       <ConfigProvider theme={theme}>
         <WordInputModal />
         <main>

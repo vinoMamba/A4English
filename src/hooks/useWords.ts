@@ -17,8 +17,6 @@ type Action = {
   updateCurrentIndex: (value: number) => void
   plusOne: () => void
   minusOne: () => void
-  // deleteWordByText: (text: string) => void
-  // getWordList: () => Array<Word>
 }
 
 export const useWordList = create<State & Action>((set, get) => ({
