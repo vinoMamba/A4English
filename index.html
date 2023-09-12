@@ -5,6 +5,14 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>A4 English</title>
+    <script>
+      if(
+        Reflect.has(localStorage,'darkMode') && JSON.parse(localStorage.darkMode) ||
+        !Reflect.has(localStorage,'darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches
+      ){
+        document.documentElement.classList.add('dark')
+      }
+    </script>
   </head>
   <body>
     <noscript>

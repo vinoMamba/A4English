@@ -1,10 +1,11 @@
+import { Layout } from "../components/Layout"
 import { ThemeTrigger } from "../components/ThemeTrigger"
 
 export default function Blackboard() {
   return (
-    <div>
+    <Layout>
       <ThemeTrigger />
-    </div>
+    </Layout>
   )
 }
 
