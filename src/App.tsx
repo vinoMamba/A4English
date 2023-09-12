@@ -38,11 +38,12 @@ function App() {
 
   return (
     <>
-      {currentIndex}
       <ConfigProvider theme={theme}>
         <WordInputModal />
         <main>
-          {wordList.length > 0 ? wordList.map(i => (<WordItem key={i.sort} word={i} currentIndex={currentIndex} />)) : "Space Start"}
+          {wordList.length > 0 ? wordList.map(i => (<WordItem key={i.sort} word={i} currentIndex={currentIndex} />)) : 
+           <div className="helpInfo">Enter I to input word</div>
+          }
         </main>
       </ConfigProvider >
     </>
