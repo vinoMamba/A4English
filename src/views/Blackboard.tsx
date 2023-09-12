@@ -1,14 +1,10 @@
-import { useEffect, useState } from "react"
+import { ThemeTrigger } from "../components/ThemeTrigger"
 
 export default function Blackboard() {
-  const [value, setValue] = useState(0)
-  useEffect(() => {
-    setTimeout(() => {
-      setValue(4)
-    }, 3000)
-  }, [])
   return (
-    <div>Blackboard{value}</div>
+    <div>
+      <ThemeTrigger />
+    </div>
   )
 }
 
