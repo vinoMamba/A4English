@@ -1,0 +1,38 @@
+.wrapper {
+  position: fixed; 
+  inset: 0;
+  z-index: 50;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .loading {
+      box-sizing: border-box;
+      display: inline-block;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 4px solid #262626;
+      border-right-color: transparent;
+      animation:spin 1s linear infinite ;
+    }
+  }
+}
+
+@keyframes spin {
+ from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
