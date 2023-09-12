@@ -1,35 +1,26 @@
-import { WordInputModal } from "./components/WordInputModal"
-import { useWordList } from "./hooks/useWords"
-import { WordItem } from "./components/WordItem"
-import { useKeyPress } from "./hooks/useKeyPress"
-import { Mode, useVimKeyMaps } from "./hooks/useVimKeyMaps"
-import { Theme, Text } from '@radix-ui/themes';
+import { Suspense, lazy, useEffect } from "react"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
+import { Loading } from "./components/Loading"
+import { useDarkMode } from "./hooks/useThemeMode"
+
+const Blackboard = lazy(() => import("./views/Blackboard"))
 
 function App() {
-  const [mode] = useVimKeyMaps(s => [s.mode])
-  const [wordList, currentIndex, plusOne, minusOne] = useWordList(s => [s.wordList, s.currentIndex, s.plusOne, s.minusOne])
-
-  useKeyPress('KeyJ', () => {
-    if (mode === Mode.N) {
-      plusOne()
-    }
-  })
-
-  useKeyPress('KeyK', () => {
-    if (mode === Mode.N) {
-      minusOne()
-    }
-  })
-
+  const [isDarkMode] = useDarkMode(s => [s.isDarkMode])
+  useEffect(() => {
+    isDarkMode
+      ? document.documentElement.classList.add('dark')
+      : document.documentElement.classList.remove('dark')
+  }, [isDarkMode])
   return (
-    <Theme appearance="light" accentColor="gray" grayColor="slate" panelBackground="solid" radius="full">
-      <WordInputModal />
-      <main>
-        {wordList.length > 0 ? wordList.map(i => (<WordItem key={i.sort} word={i} currentIndex={currentIndex} />)) :
-          <Text align="center" size="6" color="gray">Enter I To Start</Text>
-        }
-      </main>
-    </Theme>
+    <BrowserRouter>
+      <Suspense fallback={<Loading />}>
+        <Routes>
+          <Route index element={<Blackboard />} />
+          <Route path="/*" element={<Navigate to="/" />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   )
 }
 
